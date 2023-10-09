@@ -1,0 +1,32 @@
+{
+    "Version": "2012-10-17",
+    "Id": "__default_policy_ID",
+    "Statement": [
+      {
+        "Sid": "__owner_statement",
+        "Effect": "Allow",
+        "Principal": {
+          "AWS": "arn:aws:iam::ID_CONTA:root"
+        },
+        "Action": "SQS:*",
+        "Resource": "arn:aws:sqs:us-east-1:ID_CONTA:NOME_FILA"
+      },
+      {
+        "Sid": "example-statement-ID",
+        "Effect": "Allow",
+        "Principal": {
+          "Service": "s3.amazonaws.com"
+        },
+        "Action": "SQS:SendMessage",
+        "Resource": "arn:aws:sqs:us-east-1:ID_CONTA:NOME_FILA",
+        "Condition": {
+          "StringEquals": {
+            "aws:SourceAccount": "ID_CONTA"
+          },
+          "ArnLike": {
+            "aws:SourceArn": "arn:aws:s3:::NOME_BUCKET"
+          }
+        }
+      }
+    ]
+  }
